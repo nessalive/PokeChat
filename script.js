@@ -5,6 +5,7 @@ const chatbotToggler = document.querySelector(" .chatbotToggler");
 const chatbotCloseBtn = document.querySelector(" .closeBtn");
 
 let userMessage;
+const inputInitHeight = chatInput.scrollHeight;
 
 //Adicionar mensagem do usuário no chat
 const createChatLi = (message, className) => {
@@ -41,14 +42,15 @@ const generateResponse = async (userMessage) => {
     }
     const pokemonData = await pokemonResponse.json();
 
-    // Obtém o ID do Pokémon dos dados recebidos
+    // Obtém o informações do Pokémon
     const pokemonId = pokemonData.id;
-
-    // Calcula a geração do Pokémon
-    const pokemonGeneration = Math.ceil(pokemonId / 151);
+    const pokeHeight = pokemonData.height
+    const pokeWeight = pokemonData.weight
+    const pokeType = pokemonData.types[0].type.name
+    //const pokemonGeneration  = pokemonData.past_types[0].generation.name
 
     // Obtém a URL da imagem do Pokémon
-    const GeraImg = (pokemonData) => {
+    const getImg = (pokemonData) => {
       // Obtém a URL da imagem do Pokémon
       const pokemonImageUrl = pokemonData.sprites.other.showdown.front_default;
 
@@ -57,13 +59,13 @@ const generateResponse = async (userMessage) => {
       imgElement.src = pokemonImageUrl;
       return imgElement;
     };
-
+    
     //chamando a função e montando img
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", "incoming");
 
     // Adicione a imagem ao <li>
-    const imgElement = GeraImg(pokemonData);
+    const imgElement = getImg(pokemonData);
     chatLi.appendChild(imgElement);
 
     // Adiciona a mensagem do Pokémon ao chat
@@ -71,8 +73,12 @@ const generateResponse = async (userMessage) => {
 
     chatbox.appendChild(
       createChatLi(
-      `O pokemon que você pediu foi: ${userMessage} Numero na pokedex:${pokemonId}
-      Sua geração: ${pokemonGeneration}`, "incoming"));
+      `O pokemon que você pediu foi: ${userMessage}
+Numero na pokedex: ${pokemonId}
+Geração: ${pokemonGeneration}
+Peso: ${pokeWeight}kg
+Altura: ${pokeHeight}
+Tipo: ${pokeType}`, "incoming"));
   } catch (error) {
     console.error(error);
   } finally {
@@ -84,6 +90,7 @@ const handleChat = () => {
   userMessage = chatInput.value.trim();
   if (!userMessage) return;
   chatInput.value = "";
+  chatInput.style.height = `${inputInitHeight}px`;
 
   //anexar a mensagem do usuário ao chat
   chatbox.appendChild(createChatLi(userMessage, "outGoing"));
@@ -107,6 +114,22 @@ const handleChat = () => {
     }
   }, 700);
 };
+
+chatInput.addEventListener("input", () =>{
+  //tamanho do textarea
+  chatInput.style.height = `${inputInitHeight}px`;
+  chatInput.style.height = `${chatInput.scrollHeight}px`;
+})
+
+chatInput.addEventListener("keydown", (e) =>{
+  //enviar a mensagem com o enter esse evento só funcionara se a tela for maior que 800 pixels
+  if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800){
+    e.preventDefault();
+    handleChat();
+  }
+})
+
+
 
 sendChatbtn.addEventListener("click", handleChat);
 chatbotCloseBtn.addEventListener("click", () =>
