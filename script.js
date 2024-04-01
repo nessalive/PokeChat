@@ -75,9 +75,8 @@ const generateResponse = async (userMessage) => {
       createChatLi(
       `O pokemon que você pediu foi: ${userMessage}
 Numero na pokedex: ${pokemonId}
-Geração: ${pokemonGeneration}
 Peso: ${pokeWeight}kg
-Altura: ${pokeHeight}
+Altura: ${pokeHeight}M
 Tipo: ${pokeType}`, "incoming"));
   } catch (error) {
     console.error(error);
