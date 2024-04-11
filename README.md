@@ -1,8 +1,16 @@
 # PokeChat
+ Projeto final do modulo Front End Dinâmico (JS DOM) do Santander-Coders
+ 
+ - link do Layout do [Figma](https://www.figma.com/file/prSgrNHiNvKKRZdH70HGcL/pokeChat?type=design&node-id=0%3A1&mode=design&t=qQpcVKuSsqueLAL5-1)
 
-<div>
-  <p>A primeira versão desse projeto foi feito apenas em HTML, CSS e JavaScript</p>
-  <p><a href="https://www.figma.com/file/prSgrNHiNvKKRZdH70HGcL/pokeChat?type=design&mode=design&t=cM2XQ24XQUpRjQ5r-1">Link do projeto no figma</a></p>
-  <p>Para usar o pokeChat na versão inicial devemos colocar apenas o nome do pokemon</p>
-    <p><a href="https://nessalive.github.io/PokeChat/">Link para o pokeChat</a></p>
-</div>
+- link do [projeto](https://nessalive.github.io/PokeChat/) 
+
+---
+
+## *Projeto realizado por:*
+
+[Vanessa Oliveira](https://github.com/nessalive)
+
+# Objetivo
+
+O objetivo desta atividade é desenvolver um chat que se comunique com a PokeApi, trazendo algumas informações do pokémon solicitado.
